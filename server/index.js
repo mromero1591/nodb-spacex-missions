@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 // ------ End Points ------ //
 app.get('/api/flights', fc.read);
-
+app.post('/api/flights', fc.create);
 
 // ------ Server Listening ------ //
 app.listen(3005, () => {
