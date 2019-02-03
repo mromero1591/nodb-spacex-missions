@@ -1,0 +1,63 @@
+/* Border box declaration 
+https://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+html {
+  box-sizing: border-box;
+}
+/* inherit border-box on all elements in the universe and before and after
+ */
+*, 
+*:before, 
+*:after {
+  box-sizing: inherit;
+}
+
+.site-header {
+  height: 85vh;
+  background-color: #181B1E;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  /* flex: 1 0 auto; */
+}
+
+.site-title {
+  color: #FFF;
+  font-size: 4em;
+}
+
+/* Forms CSS */
+.search-from {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.search-box {
+  width: 300px;
+  padding: 15px;
+  border: none;
+  
+}
+
+.search-btn {
+  margin-top: 5px; 
+  width: 100px;
+  border: 1px solid #0b0b0b;
+  background: #0b0b0b;
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: rgba(0,0,0,1) 0 1px 0;
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+  color: #8b939b;
+  text-decoration-color: #8b939b;
+  font-size: 13px;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+/* FAV FLIGHTS SECTION */
+.fav-flights-container {
+  
+}
