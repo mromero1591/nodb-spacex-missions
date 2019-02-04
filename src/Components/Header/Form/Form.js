@@ -10,10 +10,19 @@ export default class Form extends Component {
         }
     }
 
+    //Purpose: updated the flight number input as the user makes changes
+    //Param: the value of the text input.
+    //Returns: None
+    //outcome: flight number input state is updated.
     handleFlightNumberInput = (value) => {
         this.setState({flightNumberInput: value});
     }
 
+    //Purpose: calls the parent continers serach function, that will eventualy make a get request to the space x api.
+    //Param: None
+    //Returns: None
+    //outcome: call is made to the space x api.
+    //          input sate is updated to an empty string.
     hangleSearch = () => {
         const flightNumber = this.state.flightNumberInput;
         this.props.runFn(flightNumber);
