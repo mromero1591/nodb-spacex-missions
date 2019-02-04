@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FlightCard from '../Flight_Card/Flight_Card';
+import FlightCard from './Flight_Card/Flight_Card';
 import './Flight_Container.css';
 
 export default class FlightsContainer extends Component {
