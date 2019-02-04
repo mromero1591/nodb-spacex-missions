@@ -32,8 +32,8 @@ export default class FlightModal extends Component {
               <p className='modal-item'><strong className='modal-label'>Year:</strong> <span className='modal-text-item'>{this.props.flight.launchYear}</span></p>
               <p className='modal-item'><strong className="modal-label">Status:</strong> <span className={`launch-${status} modal-text-item`}>{status}</span></p>
               <textarea className='modal-comment-area' placeholder='Enter Comment...' value={this.state.commentInput} onChange={ (e) => {this.handleCommentInput(e.target.value)}} />
-              <button className='modal-btn' onClick={ this.runAdd}><span className='modal-text-item'>Add To Collection</span></button>
-              <button className='modal-btn' onClick={ () => this.props.cancel()} ><span className='modal-text-item'>Look for new flight</span></button>
+              <button className='btn modal-btn' onClick={ this.runAdd}><span className='modal-text-item'>Add To Collection</span></button>
+              <button className='btn modal-btn' onClick={ () => this.props.cancel()} ><span className='modal-text-item'>Look for new flight</span></button>
           </div>
       </div>
     );

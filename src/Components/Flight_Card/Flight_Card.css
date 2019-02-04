@@ -46,4 +46,9 @@
     text-decoration: none;
     grid-row: 6/7;
     cursor: pointer;
+    margin-top: 5px;
+    margin-left: 5px;  
+    width: 100px;
+    border-radius: 20px;
+    font-size: 13px;
 }

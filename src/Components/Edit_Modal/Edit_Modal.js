@@ -49,10 +49,10 @@ export default class FlightModal extends Component {
                     placeholder='Enter Comment...' 
                     value={this.state.commentInput} 
                     onChange={ (e) => {this.handleCommentInput(e.target.value)}} />
-                <button className='modal-btn' onClick={this.runEdit}>
+                <button className='btn modal-btn' onClick={this.runEdit}>
                   <span className='modal-text-item'>Update Flight</span>
                 </button>
-                <button className='modal-btn' onClick={ () => this.props.cancel()} >
+                <button className='btn modal-btn' onClick={ () => this.props.cancel()} >
                     <span className='modal-text-item'>Cancel</span>
                 </button>
           </div>

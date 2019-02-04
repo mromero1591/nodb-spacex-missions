@@ -30,8 +30,8 @@ export default function FlightCard(props) {
             <strong className='card-label'>Comment: </strong> 
             <span className='card-text'>{shortComment}</span>
           </p>
-          <button className='card-btn' onClick={ () => props.editFlight(props.flight)}>Edit</button>
-          <button className='card-btn' onClick={() => props.remove(props.flightNumber)}>Delete</button>
+          <button className='btn card-btn' onClick={ () => props.editFlight(props.flight)}>Edit</button>
+          <button className='btn card-btn' onClick={() => props.remove(props.flightNumber)}>Delete</button>
         </div>
     </div>
   )

@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './Form.css';
 
 export default class Form extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export default class Form extends Component {
     return (
       <div className='search-from'>
         <input placeholder='Enter Flight Number...' className='search-box' type='number' value={this.state.flightNumberInput} onChange={ (e) => {this.handleFlightNumberInput(e.target.value)} } />
-        <button onClick={this.hangleSearch} className="search-btn">Search</button>
+        <button onClick={this.hangleSearch} className="btn search-btn">Search</button>
       </div>
     )
   }

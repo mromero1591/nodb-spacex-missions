@@ -78,15 +78,11 @@
     margin-top: 5px;
     margin-left: 5px;  
     width: 100px;
-    border: 1px solid #ffca28;
-    background: #ffca28;
     border-radius: 20px;
-    box-shadow: rgba(0,0,0,1) 0 1px 0;
-    color: #000;
-    text-decoration-color: #8b939b;
     font-size: 13px;
     text-decoration: none;
     grid-row: 6/7;
+    padding: 10px 5px;
   }
   
   .modal-btn:hover {

@@ -31,33 +31,39 @@ body {
   letter-spacing: 10px;
 }
 
-/* Forms CSS */
-.search-from {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-}
-.search-box {
-  width: 300px;
-  padding: 15px;
-  border: none;
-  
-}
-
-.search-btn {
-  margin-top: 5px; 
-  width: 100px;
+.btn {
   border: 1px solid #0b0b0b;
-  background: #0b0b0b;
-  padding: 8px 16px;
-  border-radius: 20px;
+  background-color: #ffca28;
   box-shadow: rgba(0,0,0,1) 0 1px 0;
   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-  color: #8b939b;
-  text-decoration-color: #8b939b;
-  font-size: 13px;
+  color: #000;
+  text-decoration-color: #000;
   text-decoration: none;
   vertical-align: middle;
+  outline: none;
+
+}
+.btn:hover {
+  cursor: pointer;
+  background-color: #000;
+  color: #ffca28;
+  border: 1px solid #000;
+  animation: color_change .5s;
+  transform: scale(0.99);
+  transform: translateY(4px);
+}
+
+.btn:active {
+  transform: translateY(4px);
+}
+
+@keyframes color_change {
+  from {
+      background-color: #ffca28;
+      color: #000;
+  }
+  to { 
+      background-color: #000;
+      color: #ffca28; 
+  }
 }
