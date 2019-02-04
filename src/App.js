@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Form from './Components/Form';
+import Form from './Components/Form/Form';
 import axios from 'axios';
-import FlightModal from './Components/Flight_Modal';
-import FlightCard from './Components/Flight_Card';
+import FlightModal from './Components/Flight_Modal/Flight_Modal';
+import FlightContainer from './Components/Flight_Container/Flights_Container'; 
+import EditModal from './Components/Edit_Modal/Edit_Modal';
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends Component {
       flights: [],
       apiUrl: 'https://api.spacexdata.com/v3/launches',
       flightModalStatus: false,
+      editflightModalStatus: false,
       currentFlight: {}
     }    
   }
@@ -47,9 +49,13 @@ class App extends Component {
     });
   }
 
-  addNewFlightToCollection = () => {
+  addNewFlightToCollection = (comment) => {
+    const updatedFlight = {
+      ...this.state.currentFlight,
+      comment: comment
+    }
     //push the new flight to the database.
-    axios.post(`/api/flights`, this.state.currentFlight)
+    axios.post(`/api/flights`, updatedFlight)
     .then( res => {
       this.setState({
         flights: res.data,
@@ -60,31 +66,70 @@ class App extends Component {
       console.log('faced error');
     })
   }
+
+  removeFlight = (flightId) => {
+    axios.delete(`/api/flights/${flightId}`)
+        .then(res => {
+            this.setState({
+              flights: res.data
+            })
+        }).catch(error => {
+            console.log(error);
+        })
+  }
+
+  newSearch = () => {
+    this.setState({flightModalStatus: false});
+  }
+
+  showEditFlight = (flight) => {
+    this.setState({
+      currentFlight: flight,
+      editflightModalStatus: true
+    })
+  }
+
+  closeEdit = () => {
+    this.setState({
+      editflightModalStatus: false
+    })
+  }
+
+  editFlight = (flight, updatedComment) => {
+    const updatedFlight = {
+      ...this.state.currentFlight,
+      comment: updatedComment,
+    }
+
+    axios.put(`/api/flights/${updatedFlight.flightNumber}`, updatedFlight)
+    .then( res => {
+      this.setState({
+        flights: res.data,
+        currentFlight: {},
+        editflightModalStatus: false
+      })
+    }).catch(error => {
+      console.log(error.data);
+    })
+    // axios.put('/api/flights', )  
+  }
   render() {
-    const flights = this.state.flights.map( (flight) => {
-      return (
-          <FlightCard key={flight.flightNumber} flight={flight} />
-      );
-    });
     return (
       <div className="">
         <header>
           <div className="site-header">
-            <h1 className='site-title'>Find your Fav Flights</h1>
+            <h1 className='site-title'>Find A SpaceX Flight</h1>
             <Form runFn={this.getFlight}/>
           </div>
         </header>
-        <section className='fav-flights-container'>
-          { this.state.flights.length === 0 ? (
-              <div>Add some Faves</div>
-            ) : (
-              <div>{flights}</div>
-            )
-          }
-        </section>
+        <FlightContainer flights={this.state.flights} remove={this.removeFlight} editFlight={this.showEditFlight}/>
         
         {this.state.flightModalStatus &&
-          <FlightModal flight={this.state.currentFlight} add={this.addNewFlightToCollection} />
+          <FlightModal flight={this.state.currentFlight} add={this.addNewFlightToCollection} cancel={this.newSearch} />
+        }
+
+        {this.state.editflightModalStatus &&
+          <EditModal flight={this.state.currentFlight} edit={this.editFlight} cancel={this.closeEdit} />
         }
 
       </div>

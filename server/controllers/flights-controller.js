@@ -7,13 +7,15 @@ module.exports = {
 
     create: (req,res) => {
         //get the flight info from the body and create a new flight to add to the flights database.
-        const {flightNumber,launchYear,launchSuccess,rocket,missionName} = req.body;
+        const {flightNumber,launchYear,launchSuccess,rocket,missionName, comment} = req.body;
+        
         const newFlight = {
             flightNumber,
             launchYear,
             launchSuccess,
             rocket,
-            missionName
+            missionName,
+            comment
         }
         //look in the flights array to ensure that the array does not already have the flight
         const flightExist = flights.findIndex( flight => flight.flightNumber === newFlight.flightNumber);
@@ -25,5 +27,42 @@ module.exports = {
         //return the flight.
         res.status(200).send(flights);
 
+    },
+
+    delete: (req,res) => {
+        const {id} = req.params;
+
+        const flightExist = flights.findIndex( flight => id == flight.flightNumber);
+        
+        console.log(flightExist);
+        if(flightExist !== -1) {
+            flights.splice(flightExist,1);
+        }
+
+        res.status(200).send(flights);
+
+    },
+
+    update: (req,res) => {
+        const {id} = req.params;
+        const {flightNumber,launchYear,launchSuccess,rocket,missionName, comment} = req.body;
+        
+        const newFlight = {
+            flightNumber,
+            launchYear,
+            launchSuccess,
+            rocket,
+            missionName,
+            comment
+        }
+
+        console.log(newFlight);
+        const flightExist = flights.findIndex( flight => id == flight.flightNumber);
+console.log(flightExist);
+        if(flightExist !== -1) {
+            flights.splice(flightExist, 1, newFlight);
+        }
+
+        res.status(200).send(flights);
     }
 }

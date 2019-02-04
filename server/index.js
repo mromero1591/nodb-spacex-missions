@@ -9,6 +9,8 @@ app.use(bodyParser.json());
 // ------ End Points ------ //
 app.get('/api/flights', fc.read);
 app.post('/api/flights', fc.create);
+app.delete('/api/flights/:id', fc.delete);
+app.put('/api/flights/:id', fc.update);
 
 // ------ Server Listening ------ //
 app.listen(3005, () => {

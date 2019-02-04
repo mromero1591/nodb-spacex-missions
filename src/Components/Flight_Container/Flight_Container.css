@@ -1,0 +1,15 @@
+
+.flights-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 4%;
+    margin: 4% 4%;  
+}
+
+.flight-container-title {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2em;
+    letter-spacing: 2em;
+}
