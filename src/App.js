@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Form from './Components/Form/Form';
 import axios from 'axios';
+import Header from './Components/Header/Header';
 import FlightModal from './Components/Flight_Modal/Flight_Modal';
 import FlightContainer from './Components/Flight_Container/Flights_Container'; 
 import EditModal from './Components/Edit_Modal/Edit_Modal';
@@ -19,13 +20,23 @@ class App extends Component {
     }    
   }
 
+  //Purpose: When the componenet mounts, grab the flights from the server
+  //Param: None
+  //Returns: None
+  //outcome: flights states is updated to match the server data.
   componentDidMount() {
+    //use axios to get the flights from the server.
     axios.get('/api/flights').then(res => {
       this.setState({flights: res.data})
     })
   }
 
+  //Purpose: This will make a call to the sapace x api and return a single mission
+  //Param: int - The id of the flight to get
+  //Returns: None
+  //outcome: the current flight state is updated. And a flight modal come up.
   getFlight = (flightId) => {
+    //use a get call to the space x with the given id.
     axios.get(`${this.state.apiUrl}/${flightId}`)
     .then(res => {
       //grab all the items from the rocket.
@@ -46,15 +57,25 @@ class App extends Component {
         flightModalStatus: true
       })
     }).catch( error => {
+      alert('There was a problem with getting the flight');
     });
   }
 
+  //Purpose: add the flight from space x to the server.
+  //Param: string - the comment to attach to the flight info.
+  //Returns: None
+  //outcome: server will be updaed with the new flight.
+  //        current flight state will be set to empty
+  //        flights state will update to include new flight.
+  //        flightModalStatus will update to false
   addNewFlightToCollection = (comment) => {
+    //create an updatedFlight from the current flight info to contain a comment.
     const updatedFlight = {
       ...this.state.currentFlight,
       comment: comment
     }
-    //push the new flight to the database.
+
+    //push the new flight to the database, and update state.
     axios.post(`/api/flights`, updatedFlight)
     .then( res => {
       this.setState({
@@ -63,25 +84,40 @@ class App extends Component {
         flightModalStatus: false
       })
     }).catch( error => {
-      console.log('faced error');
+      alert('error in adding the new flight');
     })
   }
 
+  //Purpose: remove a given flight from the database.
+  //Param: int - the flight id to remove.
+  //Returns: None
+  //outcome: server will be updated to not include given flight.
+  //        flights state will update to match the server.
   removeFlight = (flightId) => {
+    //use a delete call to server api.
     axios.delete(`/api/flights/${flightId}`)
         .then(res => {
             this.setState({
               flights: res.data
             })
         }).catch(error => {
-            console.log(error);
+            alert('couldnt delete the flight');
         })
   }
 
+  //Purpose: close the flight modal
+  //Param: none.
+  //Returns: None
+  //outcome: the flightmodalstatus will be update to false, and the modal will close.
   newSearch = () => {
     this.setState({flightModalStatus: false});
   }
 
+  //Purpose: bring up the edit flight modal
+  //Param: obj - the flight to add to the edit modal
+  //Returns: None
+  //outcome: current flight state will upadate to the selected flight.
+  //        the flight edit modal will appear.
   showEditFlight = (flight) => {
     this.setState({
       currentFlight: flight,
@@ -89,18 +125,32 @@ class App extends Component {
     })
   }
 
+  //Purpose: close the edit modal
+  //Param: none.
+  //Returns: None
+  //outcome: the flight modal will close and state will be update to false.
   closeEdit = () => {
     this.setState({
       editflightModalStatus: false
     })
   }
 
+  //Purpose: update the server with the edited comment
+  //Param: obj - the flight to add to the edit modal
+  //       string - the updated comment.
+  //Returns: None
+  //outcome: the flight will be updated with a new comment in the server
+  //        current flight state will become an empty obj
+  //        edit flight modal will close
+  //        flights state will be updated to match the server.
   editFlight = (flight, updatedComment) => {
+    //create a new flight object to send to the server.
     const updatedFlight = {
       ...this.state.currentFlight,
       comment: updatedComment,
     }
 
+    //call the put method on the server with the flight id and the updated flight object.
     axios.put(`/api/flights/${updatedFlight.flightNumber}`, updatedFlight)
     .then( res => {
       this.setState({
@@ -109,19 +159,16 @@ class App extends Component {
         editflightModalStatus: false
       })
     }).catch(error => {
-      console.log(error.data);
+      alert('couldnt update the flight');
     })
-    // axios.put('/api/flights', )  
   }
+
+
   render() {
     return (
       <div className="">
-        <header>
-          <div className="site-header">
-            <h1 className='site-title'>Find A SpaceX Flight</h1>
-            <Form runFn={this.getFlight}/>
-          </div>
-        </header>
+        <Header search={this.getFlight}/>
+
         <FlightContainer flights={this.state.flights} remove={this.removeFlight} editFlight={this.showEditFlight}/>
         
         {this.state.flightModalStatus &&
@@ -131,7 +178,6 @@ class App extends Component {
         {this.state.editflightModalStatus &&
           <EditModal flight={this.state.currentFlight} edit={this.editFlight} cancel={this.closeEdit} />
         }
-
       </div>
     );
   }

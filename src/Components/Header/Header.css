@@ -1,0 +1,16 @@
+
+.site-header {
+    height: 85vh;
+    background-color: #181B1E;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    /* flex: 1 0 auto; */
+  }
+  
+  .site-title {
+    color: #FFF;
+    font-size: 4em;
+    letter-spacing: 10px;
+  }

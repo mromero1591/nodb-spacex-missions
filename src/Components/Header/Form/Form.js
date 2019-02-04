@@ -19,6 +19,7 @@ export default class Form extends Component {
         this.props.runFn(flightNumber);
         this.setState({flightNumberInput: ''});
     }
+    
     render() {
     return (
       <div className='search-from'>
