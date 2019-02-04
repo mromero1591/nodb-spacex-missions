@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Form from './Components/Form/Form';
 import axios from 'axios';
 import Header from './Components/Header/Header';
 import FlightModal from './Components/Flight_Modal/Flight_Modal';
