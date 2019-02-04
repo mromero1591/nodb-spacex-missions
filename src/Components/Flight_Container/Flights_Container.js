@@ -22,7 +22,7 @@ export default class FlightsContainer extends Component {
             );
           });
         return (    
-            <section>
+            <section className='flights-container-section'>
                 { this.props.flights.length === 0 ? (
                     <div className="flight-container-title">Add some Flights</div>
                 ) : (

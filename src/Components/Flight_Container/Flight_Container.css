@@ -1,4 +1,6 @@
-
+.flights-container-section {
+    min-height: 50vh;
+}
 .flights-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
