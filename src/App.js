@@ -5,6 +5,7 @@ import Header from './Components/Header/Header';
 import FlightModal from './Components/Flight_Modal/Flight_Modal';
 import FlightContainer from './Components/Flight_Container/Flights_Container'; 
 import EditModal from './Components/Edit_Modal/Edit_Modal';
+import Footer from './Components/Footer/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -190,6 +191,8 @@ class App extends Component {
         {this.state.editflightModalStatus &&
           <EditModal flight={this.state.currentFlight} edit={this.editFlight} cancel={this.closeEdit} />
         }
+
+        <Footer />
       </div>
     );
   }

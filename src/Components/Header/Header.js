@@ -8,7 +8,7 @@ export default function Header(props) {
         <header>
             <div className="site-header">
                 <h1 className='site-title'>Find A SpaceX Flight</h1>
-                <Form runFn={props.search} runSearchAll={props.runSearchAll}/>
+                <Form runFn={props.search}/>
             </div>
         </header>
     </div>
