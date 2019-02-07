@@ -1,3 +1,4 @@
+require('dotenv').config(); 
 const express = require('express');
 const bodyParser = require('body-parser');
 const fc = require('./controllers/flights-controller');

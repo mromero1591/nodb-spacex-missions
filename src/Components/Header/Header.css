@@ -6,11 +6,11 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    /* flex: 1 0 auto; */
+    text-align: center;
+    color: #FFF;
   }
   
   .site-title {
-    color: #FFF;
     font-size: 4em;
     letter-spacing: 10px;
   }
