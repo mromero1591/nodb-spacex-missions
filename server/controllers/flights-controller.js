@@ -34,7 +34,6 @@ module.exports = {
 
         const flightExist = flights.findIndex( flight => id == flight.flightNumber);
         
-        console.log(flightExist);
         if(flightExist !== -1) {
             flights.splice(flightExist,1);
         }

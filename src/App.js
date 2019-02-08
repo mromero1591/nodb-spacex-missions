@@ -13,7 +13,6 @@ class App extends Component {
 
     this.state = {
       flights: [],
-      allFlights: [],
       apiUrl: 'https://api.spacexdata.com/v3/launches',
       flightModalStatus: false,
       editflightModalStatus: false,
@@ -61,18 +60,6 @@ class App extends Component {
     }).catch( error => {
       alert('There was a problem with getting the flight');
     });
-  }
-
-  searchAllFlights = () => {
-    axios.get(`${this.state.apiUrl}`)
-    .then(res => {
-      this.setState({
-        allFlights: res.data,
-        allFlightsModalStatus: true
-      })
-    }).catch( error => {
-      console.log('error in getting all flights');
-    })
   }
 
   //Purpose: add the flight from space x to the server.
@@ -180,7 +167,7 @@ class App extends Component {
   render() {
     return (
       <div className="">
-        <Header search={this.getFlight} runSearchAll={this.searchAllFlights}/>
+        <Header search={this.getFlight} />
 
         <FlightContainer flights={this.state.flights} remove={this.removeFlight} editFlight={this.showEditFlight}/>
         
