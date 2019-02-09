@@ -6,6 +6,7 @@ import FlightModal from './Components/Flight_Modal/Flight_Modal';
 import FlightContainer from './Components/Flight_Container/Flights_Container'; 
 import EditModal from './Components/Edit_Modal/Edit_Modal';
 import Footer from './Components/Footer/Footer';
+import NotificationContainer from './Components/NotificationContainer/NotificationContainer';
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class App extends Component {
       flightModalStatus: false,
       editflightModalStatus: false,
       allFlightsModalStatus: false,
+      notificationStatus: false,
       currentFlight: {}
     }    
   }
@@ -37,6 +39,8 @@ class App extends Component {
   //Returns: None
   //outcome: the current flight state is updated. And a flight modal come up.
   getFlight = (flightId) => {
+    if(this.state.notificationStatus)
+      this.resetNotification();
     //use a get call to the space x with the given id.
     axios.get(`${this.state.apiUrl}/${flightId}`)
     .then(res => {
@@ -58,7 +62,7 @@ class App extends Component {
         flightModalStatus: true
       })
     }).catch( error => {
-      alert('There was a problem with getting the flight');
+      this.setState({notificationStatus: true});
     });
   }
 
@@ -164,9 +168,14 @@ class App extends Component {
     })
   }
 
+  resetNotification = () => this.setState({notificationStatus: false});
+
   render() {
     return (
       <div className="">
+        {this.state.notificationStatus &&
+          <NotificationContainer />
+        }
         <Header search={this.getFlight} />
 
         <FlightContainer flights={this.state.flights} remove={this.removeFlight} editFlight={this.showEditFlight}/>
@@ -178,7 +187,6 @@ class App extends Component {
         {this.state.editflightModalStatus &&
           <EditModal flight={this.state.currentFlight} edit={this.editFlight} cancel={this.closeEdit} />
         }
-
         <Footer />
       </div>
     );
